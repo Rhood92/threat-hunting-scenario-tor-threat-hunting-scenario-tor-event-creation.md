@@ -47,23 +47,27 @@ DeviceFileEvents
 // TOR Browser being silently installed
 // Take note of two spaces before the /S (I don't know why)
 DeviceProcessEvents
-| where ProcessCommandLine contains "tor-browser-windows-x86_64-portable-14.0.1.exe  /S"
+| where ProcessCommandLine startswith "tor-browser-windows"
+| where DeviceName == "rich-mde-test"
 | project Timestamp, DeviceName, ActionType, FileName, ProcessCommandLine
 
 // TOR Browser or service was successfully installed and is present on the disk
 DeviceFileEvents
 | where FileName has_any ("tor.exe", "firefox.exe")
+| where DeviceName == "rich-mde-test"
 | project  Timestamp, DeviceName, RequestAccountName, ActionType, InitiatingProcessCommandLine
 
 // TOR Browser or service was launched
 DeviceProcessEvents
 | where ProcessCommandLine has_any("tor.exe","firefox.exe")
+| where DeviceName == "rich-mde-test"
 | project  Timestamp, DeviceName, AccountName, ActionType, ProcessCommandLine
 
 // TOR Browser or service is being used and is actively creating network connections
 DeviceNetworkEvents
 | where InitiatingProcessFileName in~ ("tor.exe", "firefox.exe")
 | where RemotePort in (9001, 9030, 9040, 9050, 9051, 9150)
+| where DeviceName == "rich-mde-test"
 | project Timestamp, DeviceName, InitiatingProcessAccountName, InitiatingProcessFileName, RemoteIP, RemotePort, RemoteUrl
 | order by Timestamp desc
 
