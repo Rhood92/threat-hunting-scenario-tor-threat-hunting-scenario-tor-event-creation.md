@@ -76,7 +76,7 @@ DeviceFileEvents
 
 ## Created By:
 - **Author Name**: Richard Hood Jr.
-- **Author Contact**: https://www.linkedin.com/in/Rhood92/
+- **Author Contact**: https://www.linkedin.com/in/richard-hood-jr
 - **Date**: March 12, 2025
 
 ## Validated By:
